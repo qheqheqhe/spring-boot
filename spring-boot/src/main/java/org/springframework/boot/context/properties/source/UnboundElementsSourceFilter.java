@@ -26,25 +26,27 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.env.StandardEnvironment;
 
 /**
- * Function used to determine if a {@link ConfigurationPropertySource} should be
- * included when determining unbound elements. If the underlying {@link PropertySource}
- * is a systemEnvironment or systemProperties property source, it will not be considered
- * for unbound element failures.
+ * Function used to determine if a {@link ConfigurationPropertySource} should be included
+ * when determining unbound elements. If the underlying {@link PropertySource} is a
+ * systemEnvironment or systemProperties property source, it will not be considered for
+ * unbound element failures.
  *
  * @author Madhura Bhave
  * @since 2.0.0
  */
-public class UnboundElementsSourceFilter implements Function<ConfigurationPropertySource, Boolean> {
+public class UnboundElementsSourceFilter
+		implements Function<ConfigurationPropertySource, Boolean> {
 
-	private static final Set<String> BENIGN_PROPERTY_SOURCE_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-			StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME,
-			StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME)));
+	private static final Set<String> BENIGN_PROPERTY_SOURCE_NAMES = Collections
+			.unmodifiableSet(new HashSet<>(Arrays.asList(
+					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME,
+					StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME)));
 
 	@Override
 	public Boolean apply(ConfigurationPropertySource configurationPropertySource) {
 		Object underlyingSource = configurationPropertySource.getUnderlyingSource();
 		if (underlyingSource instanceof PropertySource) {
-			String name = ((PropertySource) underlyingSource).getName();
+			String name = ((PropertySource<?>) underlyingSource).getName();
 			return !BENIGN_PROPERTY_SOURCE_NAMES.contains(name);
 
 		}
@@ -52,4 +54,3 @@ public class UnboundElementsSourceFilter implements Function<ConfigurationProper
 	}
 
 }
-

@@ -16,6 +16,8 @@
 
 package org.springframework.boot.actuate.autoconfigure;
 
+import java.util.Collections;
+
 import liquibase.integration.spring.SpringLiquibase;
 import org.flywaydb.core.Flyway;
 import org.junit.After;
@@ -36,15 +38,12 @@ import org.springframework.boot.actuate.endpoint.RequestMappingEndpoint;
 import org.springframework.boot.actuate.endpoint.ShutdownEndpoint;
 import org.springframework.boot.actuate.endpoint.TraceEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.AuditEventsMvcEndpoint;
-import org.springframework.boot.actuate.endpoint.mvc.DocsMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter;
 import org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint;
-import org.springframework.boot.actuate.endpoint.mvc.HalJsonMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.JolokiaMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.LogFileMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.LoggersMvcEndpoint;
-import org.springframework.boot.actuate.endpoint.mvc.ManagementServletContext;
 import org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoints;
@@ -84,13 +83,12 @@ public class MvcEndpointPathConfigurationTests {
 
 	@Parameters(name = "{0}")
 	public static Object[] parameters() {
-		return new Object[] { new Object[] { "actuator", HalJsonMvcEndpoint.class },
+		return new Object[] {
 				new Object[] { "auditevents", AuditEventsMvcEndpoint.class },
 				new Object[] { "autoconfig", AutoConfigurationReportEndpoint.class },
 				new Object[] { "beans", BeansEndpoint.class },
 				new Object[] { "configprops",
 						ConfigurationPropertiesReportEndpoint.class },
-				new Object[] { "docs", DocsMvcEndpoint.class },
 				new Object[] { "dump", DumpEndpoint.class },
 				new Object[] { "env", EnvironmentMvcEndpoint.class },
 				new Object[] { "flyway", FlywayEndpoint.class },
@@ -161,17 +159,12 @@ public class MvcEndpointPathConfigurationTests {
 
 		@Bean
 		public FlywayEndpoint flyway() {
-			return new FlywayEndpoint(new Flyway());
+			return new FlywayEndpoint(Collections.singletonMap("flyway", new Flyway()));
 		}
 
 		@Bean
 		public LiquibaseEndpoint liquibase() {
 			return new LiquibaseEndpoint(new SpringLiquibase());
-		}
-
-		@Bean
-		public DocsMvcEndpoint docs(ManagementServletContext managementServletContext) {
-			return new DocsMvcEndpoint(managementServletContext);
 		}
 
 	}

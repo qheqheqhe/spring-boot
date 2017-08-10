@@ -98,7 +98,8 @@ public class SampleActuatorApplicationTests {
 		testHome(); // makes sure some requests have been made
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> entity = this.restTemplate
-				.withBasicAuth("user", getPassword()).getForEntity("/application/metrics", Map.class);
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/metrics", Map.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		@SuppressWarnings("unchecked")
 		Map<String, Object> body = entity.getBody();
@@ -109,35 +110,29 @@ public class SampleActuatorApplicationTests {
 	public void testEnv() throws Exception {
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> entity = this.restTemplate
-				.withBasicAuth("user", getPassword()).getForEntity("/application/env", Map.class);
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/env", Map.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		@SuppressWarnings("unchecked")
 		Map<String, Object> body = entity.getBody();
-		assertThat(body).containsKey("systemProperties");
+		assertThat(body).containsKey("propertySources");
 	}
 
 	@Test
 	public void testHealth() throws Exception {
-		ResponseEntity<String> entity = this.restTemplate.getForEntity("/application/health",
-				String.class);
+		ResponseEntity<String> entity = this.restTemplate
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/health", String.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(entity.getBody()).contains("\"status\":\"UP\"");
 		assertThat(entity.getBody()).doesNotContain("\"hello\":\"1\"");
 	}
 
 	@Test
-	public void testSecureHealth() throws Exception {
+	public void testInfo() throws Exception {
 		ResponseEntity<String> entity = this.restTemplate
 				.withBasicAuth("user", getPassword())
-				.getForEntity("/application/health", String.class);
-		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(entity.getBody()).contains("\"hello\":1");
-	}
-
-	@Test
-	public void testInfo() throws Exception {
-		ResponseEntity<String> entity = this.restTemplate.getForEntity("/application/info",
-				String.class);
+				.getForEntity("/application/info", String.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(entity.getBody())
 				.contains("\"artifact\":\"spring-boot-sample-actuator\"");
@@ -176,7 +171,8 @@ public class SampleActuatorApplicationTests {
 		this.restTemplate.getForEntity("/health", String.class);
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<List> entity = this.restTemplate
-				.withBasicAuth("user", getPassword()).getForEntity("/application/trace", List.class);
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/trace", List.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> list = entity.getBody();
@@ -192,7 +188,8 @@ public class SampleActuatorApplicationTests {
 		this.restTemplate.getForEntity("/application/health?param1=value1", String.class);
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<List> entity = this.restTemplate
-				.withBasicAuth("user", getPassword()).getForEntity("/application/trace", List.class);
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/trace", List.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> list = entity.getBody();
@@ -219,7 +216,8 @@ public class SampleActuatorApplicationTests {
 	public void testBeans() throws Exception {
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<List> entity = this.restTemplate
-				.withBasicAuth("user", getPassword()).getForEntity("/application/beans", List.class);
+				.withBasicAuth("user", getPassword())
+				.getForEntity("/application/beans", List.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(entity.getBody()).hasSize(1);
 		Map<String, Object> body = (Map<String, Object>) entity.getBody().get(0);

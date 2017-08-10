@@ -94,7 +94,7 @@
 		<httpcore.version>4.4.6</httpcore.version>
 		<infinispan.version>9.1.0.Final</infinispan.version>
 		<influxdb-java.version>2.7</influxdb-java.version>
-		<jackson.version>2.9.0.pr4</jackson.version>
+		<jackson.version>2.9.0</jackson.version>
 		<janino.version>3.0.7</janino.version>
 		<javassist.version>3.21.0-GA</javassist.version> <!-- Same as Hibernate -->
 		<javax-cache.version>1.0.0</javax-cache.version>
@@ -156,10 +156,10 @@
 		<spring.version>5.0.0.RC3</spring.version>
 		<spring-amqp.version>2.0.0.M5</spring-amqp.version>
 		<spring-cloud-connectors.version>2.0.0.M1</spring-cloud-connectors.version>
-		<spring-batch.version>4.0.0.BUILD-SNAPSHOT</spring-batch.version>
+		<spring-batch.version>4.0.0.M3</spring-batch.version>
 		<spring-data-releasetrain.version>Kay-RC2</spring-data-releasetrain.version>
 		<spring-hateoas.version>0.23.0.RELEASE</spring-hateoas.version>
-		<spring-integration.version>5.0.0.BUILD-SNAPSHOT</spring-integration.version>
+		<spring-integration.version>5.0.0.M6</spring-integration.version>
 		<spring-kafka.version>2.0.0.M3</spring-kafka.version>
 		<spring-ldap.version>2.3.1.RELEASE</spring-ldap.version>
 		<spring-mobile.version>2.0.0.M1</spring-mobile.version>
@@ -198,7 +198,7 @@
 		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
 		<maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
-		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
 		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
@@ -238,11 +238,6 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-actuator</artifactId>
-				<version>2.0.0.BUILD-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-actuator-docs</artifactId>
 				<version>2.0.0.BUILD-SNAPSHOT</version>
 			</dependency>
 			<dependency>
